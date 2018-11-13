@@ -37,10 +37,26 @@ def execCmd(args, path=None):
     return obj
 
 
-def execCmdSimle(args, path=None):
+def execCmdWait(args, path=None, printOut=False):
     obj = execCmd(args, path)
 
+    if printOut:
+        if sys.platform == 'win32':
+            encode = 'gbk'
+        else:
+            encode = 'utf-8'
+        for line in obj.stdout:
+            print(line.decode(encode).strip())
+    else:
+        obj.stdout.readlines()
+
     obj.wait()
+    return obj
+
+
+def execCmdSimle(args, path=None, printOut=False):
+    obj = execCmdWait(args, path, printOut)
+
     ret = obj.returncode
     if ret != 0:
         msg = 'Fail: ' + str(ret)
@@ -49,15 +65,11 @@ def execCmdSimle(args, path=None):
     cprint('Success ')
 
 
-def execCmdWait(args, path=None):
-    obj = execCmd(args, path)
-
-    obj.wait()
-    return obj
-
-
-def supplementSpace(s, tarLen):
+def supplementSpace(s, tarLen, right=False):
     oriLen = len(s)
     for i in range(tarLen - oriLen):
-        s = ' ' + s
+        if right:
+            s = s + ' '
+        else:
+            s = ' ' + s
     return s
