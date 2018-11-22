@@ -46,7 +46,7 @@ def execCmdWait(args, path=None, printOut=False):
         else:
             encode = 'utf-8'
         for line in obj.stdout:
-            print(line.decode(encode).strip())
+            print(line.decode(encode).strip(), flush=True)
     else:
         obj.stdout.readlines()
 
