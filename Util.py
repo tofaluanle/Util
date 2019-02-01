@@ -75,3 +75,13 @@ def supplementSpace(s, tarLen, right=False):
         else:
             s = ' ' + s
     return s
+
+def initArgv():
+    argv = dict()
+    for i in range(len(sys.argv)):
+        if sys.argv[i].startswith('-'):
+            if len(sys.argv) > i + 1 and not sys.argv[i + 1].startswith('-'):
+                argv[sys.argv[i]] = sys.argv[i + 1]
+            else:
+                argv[sys.argv[i]] = True
+    return argv
