@@ -56,7 +56,7 @@ def execCmdWait(args, path=None, printOut=False):
     return obj
 
 
-def execCmdSimle(args, path=None, printOut=False):
+def execCmdSimple(args, path=None, printOut=False):
     obj = execCmdWait(args, path, printOut)
 
     ret = obj.returncode
