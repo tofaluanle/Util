@@ -2,7 +2,7 @@ import logging
 import os
 import sys
 
-from util import CmdTextColor
+import CmdTextColor
 
 logger = logging.getLogger('L')
 logger.setLevel(logging.DEBUG)
