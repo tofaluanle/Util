@@ -4,25 +4,15 @@ import os
 import subprocess
 import sys
 
-TAG = 'util'
-
-
-def cprint(msg, end='\n'):
-    print('[ ' + TAG + ' ] ' + msg, end=end)
-    sys.stdout.flush()
-
-
-def error(msg, end='\n'):
-    print('[ ' + TAG + ' ][ ERR ] ' + msg, end=end)
-    sys.stdout.flush()
+import L
 
 
 def execCmd(args, path=None):
     if path:
-        cprint('Path: ' + path)
+        L.d('Path: ' + path)
     else:
-        cprint('Path: ' + os.getcwd())
-    cprint('Exec: ' + ' '.join(args))
+        L.d('Path: ' + os.getcwd())
+    L.d('Exec: ' + ' '.join(args))
 
     if sys.platform == 'win32':
         shell = True
@@ -64,7 +54,7 @@ def execCmdSimple(args, path=None, printOut=False):
         msg = 'Fail: ' + str(ret)
         raise Exception(msg)
 
-    cprint('Success ')
+    L.d('Success ')
 
 
 def supplementSpace(s, tarLen, right=False):
@@ -75,4 +65,3 @@ def supplementSpace(s, tarLen, right=False):
         else:
             s = ' ' + s
     return s
-
